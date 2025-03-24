@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Registro de Atendimento</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Adicionado Font Awesome -->
+    <link rel="icon" type="image/png" href="https://proxxima.net/storage/app/media/xx.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="app-header__logo">
+                <img src="./assets/img/Logo_Proxxima_Telecom.svg" alt="Logo da Empresa">
+            </div>
+            <h1 class="app-header__title">
+            Gerador de Registro
+            </h1>
+            <p class="app-header__subtitle">Atendimento Técnico</p>
+        </header>
+
+        <main class="app-main">
+            <form id="registro-form">
+                <div class="form__section">
+                    <h2 class="form__section-title">Dados do Atendimento</h2>
+
+                    <div class="form-group">
+                        <label for="protocolo">Protocolo Operações:</label>
+                        <input type="text" class="form-control" id="protocolo" placeholder="Digite o protocolo"  padding: 8px 12px;>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria">Categoria:</label>
+                        <select class="form-control custom-select" id="categoria">
+                            <option value="">Selecione a categoria</option>
+                            <option value="instalacao_ativacao">Instalação/Ativação</option>
+                            <option value="manutencao">Manutenção</option>
+                            <option value="reparo">Reparo</option>
+                            <option value="troca_endereco">Troca de Endereço - Desprovisionar e Provisionar</option>
+                            <option value="verificar_cto">Verificar CTO</option>
+                            <option value="desprovisionar_provisionar">Desprovisionar e Provisionar</option>
+                            <option value="verificar_conexao">Verificar Conexão do Cliente</option>
+                            <option value="apenas_desprovisionar">Apenas Desprovisionar</option>
+                            <option value="apenas_provisionar">Apenas Provisionar</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form__section hidden" id="campos-adicionais">
+
+                    <div class="form-group">
+                        <label for="problema-relatado">Problema Relatado:</label>
+                        <textarea class="form-control" id="problema-relatado" rows="3" readonly></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tratativa">Tratativa:</label>
+                        <textarea class="form-control" id="tratativa" rows="4" readonly></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Técnico/solicitante enviou evidências:</label>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="evidencias" id="evidencias-sim" value="sim"> Sim
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="evidencias" id="evidencias-nao" value="nao"> Não
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                 <div class="form__buttons-container">
+                <button type="button" class="form__submit-button" id="gerar-registro">Gerar Registro</button>
+                </div>
+            </form>
+
+            <section class="app-aside" id="registro-gerado">
+                <h2 class="app-aside__title">Registro Gerado:</h2>
+                <div class="app-aside__content">
+                    <textarea id="registro-textarea" class="app-aside__text" readonly></textarea>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>© 2024 Gabriel A. Souza - Backoffice Redes. Todos os direitos reservados.
+            <a href="https://github.com/gabriel-souza-developer" target="_blank" class="app-footer__github-link">
+                <i class="fab fa-github"></i> <!-- Ícone do GitHub -->
+            </a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

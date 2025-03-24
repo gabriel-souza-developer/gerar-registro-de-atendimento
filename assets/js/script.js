@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // ... (código anterior das funções showCopyFeedback e copyToClipboard) ...
     const form = document.getElementById('registro-form');
     const gerarRegistroBtn = document.getElementById('gerar-registro');
     const categoriaSelect = document.getElementById('categoria');
@@ -9,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const registroTextarea = document.getElementById('registro-textarea');
     const registroGeradoSection = document.getElementById('registro-gerado');
 
-     // --- Função para criar e mostrar o feedback de ERRO ---
-     function showCategoryError() {
+    // --- Função para criar e mostrar o feedback de ERRO ---
+    function showCategoryError() {
         let errorDiv = document.getElementById('category-error');
 
         // Se a div de erro não existir, cria.
@@ -40,6 +39,61 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 
+     // --- Função para criar e mostrar o feedback visual ---
+     function showCopyFeedback() {
+        let feedbackDiv = document.getElementById('copy-feedback');
+
+        // Se a div de feedback não existir, cria ela.
+        if (!feedbackDiv) {
+            feedbackDiv = document.createElement('div');
+            feedbackDiv.id = 'copy-feedback';
+            feedbackDiv.style.backgroundColor = 'green';
+            feedbackDiv.style.color = 'white';
+            feedbackDiv.style.padding = '10px';
+            feedbackDiv.style.borderRadius = '5px';
+            feedbackDiv.style.position = 'fixed'; // Fixo na tela
+            feedbackDiv.style.top = '20px';       // Distância do topo
+            feedbackDiv.style.left = '50%';      // Centralizado horizontalmente
+            feedbackDiv.style.transform = 'translateX(-50%)'; // Ajuste para centralização
+            feedbackDiv.style.zIndex = '1000';    // Garante que fique acima de outros elementos
+            feedbackDiv.style.opacity = '0';       // Começa invisível
+            feedbackDiv.style.transition = 'opacity 0.5s ease-out'; // Transição suave
+            document.body.appendChild(feedbackDiv); // Adiciona ao body
+        }
+
+        feedbackDiv.textContent = 'Copiado para a área de transferência!';
+        feedbackDiv.style.opacity = '1'; // Torna visível
+
+        // Esconde o feedback após 2 segundos
+        setTimeout(() => {
+            feedbackDiv.style.opacity = '0';
+        }, 2000);
+    }
+
+    // --- Função de cópia (alternativa, mais confiável) ---
+    function copyToClipboard(text) {
+        const tempTextarea = document.createElement('textarea');
+        tempTextarea.value = text;
+        tempTextarea.style.position = 'fixed'; // Garante que fique fora da tela
+        tempTextarea.style.top = '0';
+        tempTextarea.style.left = '0';
+        tempTextarea.style.opacity = '0'; // Invisível
+        document.body.appendChild(tempTextarea);
+        tempTextarea.focus();
+        tempTextarea.select();
+        try {
+            const successful = document.execCommand('copy');
+            const msg = successful ? 'successful' : 'unsuccessful';
+            console.log('Fallback: Copying text command was ' + msg);
+            if(successful){
+                showCopyFeedback();
+            }
+        } catch (err) {
+            console.error('Fallback: Oops, unable to copy', err);
+            alert('Erro ao copiar para a área de transferência.');
+        }
+        document.body.removeChild(tempTextarea); // Remove o elemento temporário
+    }
 
     categoriaSelect.addEventListener('change', function() {
         const categoria = categoriaSelect.value;
@@ -95,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    gerarRegistroBtn.addEventListener('click', function() {
+      gerarRegistroBtn.addEventListener('click', function() {
         const protocolo = document.getElementById('protocolo').value;
         const categoria = categoriaSelect.value;
 
@@ -112,6 +166,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         registroTextarea.value = registroCompleto;
         registroGeradoSection.style.display = 'block';
+
+        // Copia para a área de transferência e mostra o feedback (CORRIGIDO)
         copyToClipboard(registroCompleto);
     });
 });

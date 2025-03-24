@@ -1,0 +1,352 @@
+/* Cores */
+:root {
+    --primary-color: #2B3591;
+    --secondary-color: #CD2784;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --text-color: #495057;
+    --accent-color: #ffc107;
+    --input-bg-color: #fff;
+    --input-border-color: #ced4da;
+    --form-section-bg: #fdfdfd;
+    --form-section-border: #d0d0d5;
+}
+
+/* Reset */
+body, h1, h2, p, form, section, div {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+
+/* Geral */
+body {
+    font-family: "Gotham", sans-serif;
+    background-color: var(--light-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.app-container {
+    max-width: 800px; /* Aumentei um pouco para ter mais espaço */
+    padding: 30px; /* Mais padding para o conteúdo */
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header */
+.app-header {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px 15px 0 0;
+    background-image: url("https://proxxima.net/themes/milha-telecom/assets/img/bgs/people-working.jpg");
+    background-size: cover; /* Ajusta a imagem para cobrir todo o cabeçalho */
+    background-position: center; /* Centraliza a imagem */
+    position: relative; /* Cria um contexto para o pseudo-elemento */
+    overflow: hidden; /* Garante que a imagem não vaze para fora do cabeçalho */
+    width: 100%;
+}
+
+/* Adicionando um efeito de sobreposição (overlay) */
+.app-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(43, 53, 145, 0.6); /* Cor primária com alguma transparência */
+    z-index: 1; /* Garante que a sobreposição fique acima da imagem */
+}
+
+.app-header>* {
+    position: relative;
+    z-index: 2;
+}
+
+.app-header__logo {
+    max-width: 120px;
+    margin-bottom: 10px;
+}
+
+.app-header__logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.app-header__title {
+    font-size: 1.8em; /* Aumentei o tamanho da fonte do título */
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.app-header__subtitle {
+    font-size: 1em; /* Aumentei o tamanho da fonte do subtítulo */
+    font-style: italic;
+    color: #eee;
+}
+
+/* Main */
+.app-main {
+    padding: 20px 0;
+    width: 100%;
+
+}
+
+.form__section {
+    margin-bottom: 20px;
+    border: 1px solid var(--form-section-border);
+    border-radius: 10px;
+    padding: 20px;
+    background-color: var(--form-section-bg);
+    width: 100%;
+}
+
+.form__section-title {
+     color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: 700;
+    border-bottom: 3px solid var(--secondary-color);
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0; /* Remove margem superior desnecessária */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/*Rótulos*/
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.form-control {
+    width: 100%;
+    border-radius: 5px;
+    font-size: 1em; /* Aumentei o tamanho da fonte */
+    border: 1px solid var(--input-border-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    box-sizing: border-box;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 5px rgba(43, 53, 145, 0.3);
+}
+
+.form-check {
+    margin-bottom: 10px;
+}
+
+/* Container para os botões */
+.form__buttons-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.form__submit-button {
+    width: auto;  /* Ocupa apenas o espaço necessário */
+    padding: 12px 25px; /* Um pouco mais de padding */
+    font-size: 1em; /* Aumentei o tamanho da fonte */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: var(--secondary-color);
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin: 20px auto; /* Centraliza o botão e adiciona margem */
+    display: block; /* Para a centralização funcionar */
+}
+
+.form__submit-button:hover {
+    background-color: #a61d69; /* Escurece um pouco no hover */
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+.form__submit-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(205, 39, 132, 0.5); /* Cor da borda de foco */
+}
+
+
+
+.form__observacao {
+    font-size: 0.8em;
+    font-style: italic;
+    color: var(--primary-color);
+    margin-top: 3px;
+}
+
+/* Aside */
+.app-aside {
+    background-color: var(--light-color);
+    padding: 20px;
+    border-top: none;
+    border-left: none;
+    display: none; /* Inicialmente oculto */
+    border-radius: 0 0 15px 15px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.app-aside__title {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.4em; /* Aumentei o tamanho da fonte */
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.app-aside__content {
+    overflow: auto;
+}
+
+.app-aside__text {
+    white-space: pre-wrap;
+    font-family: 'Courier New', monospace;
+    font-size: 1em; /* Aumentei o tamanho da fonte */
+    background-color: #fff;
+    padding: 15px; /* Aumentei o padding */
+    border-radius: 8px;
+    border: 1px solid var(--input-border-color);
+    line-height: 1.4;
+    width: 100%; /* Garante que ocupa toda a largura */
+    box-sizing: border-box; /* Inclui padding e borda na largura */
+}
+
+#tentouPeloAnielHelp {
+    margin-top: .60rem;
+}
+
+/* Footer */
+.app-footer {
+    text-align: center;
+    padding: 15px; /* Aumentei o padding */
+    background-color: var(--dark-color);
+    color: #fff;
+    font-size: 0.8em; /* Aumentei um pouco o tamanho da fonte */
+    border-radius: 0 0 15px 15px;
+    width: 100%;
+}
+
+.app-footer__github-link {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 5px;
+    transition: color 0.3s ease; /* Adiciona uma transição suave na cor */
+}
+
+.app-footer__github-link:hover {
+    color: var(--secondary-color); /* Altera a cor ao passar o mouse */
+}
+
+/* --- Adaptações e Adições para o Gerador de Registros --- */
+
+/* Dropdown (usando Bootstrap + ajustes) */
+.custom-select { /* Classe do Bootstrap para dropdowns */
+    width: 100%; /* Ocupa toda a largura */
+    /* Outros estilos do .form-control já se aplicam */
+}
+
+/* Checkboxes (usando Bootstrap + ajustes) */
+.form-check-input {
+    /* Estilos do Bootstrap */
+    margin-top: 0.2rem; /* Pequeno ajuste vertical */
+}
+
+.form-check-label {
+    /* Estilos do Bootstrap, mas vamos adicionar: */
+    color: var(--text-color); /* Cor do texto */
+    font-weight: normal; /* Negrito pode ser demais aqui */
+    margin-left: 0.5em;
+}
+
+#ferramentas-utilizadas{
+     margin-top: 1em;
+}
+/* Área do Registro Gerado */
+#registro-gerado {
+    display: none;  /*Já está no HTML, mas vamos garantir*/
+    margin-top: 30px; /* Espaço do formulário */
+}
+
+/* ... (seu CSS anterior) ... */
+
+#registro-textarea {
+    font-family: 'Arial', sans-serif; /* Ou outra fonte que você preferir */
+    font-size: 14px; /* Tamanho da fonte */
+    line-height: 1.5; /* Espaçamento entre linhas */
+    color: #333; /* Cor do texto */
+    background-color: #f5f5f5; /* Cor de fundo (opcional) */
+    border: 1px solid #ddd; /* Borda (opcional) */
+    padding: 10px;
+    resize: none; /* Impede redimensionamento */
+    min-height: 150px;/* Altura mínima maior */
+    /* Outras propriedades CSS que você quiser adicionar */
+}
+/* --- */
+.hidden {
+    display: none;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    .app-container {
+        padding: 20px; /* Reduz padding em telas menores */
+        max-width: 95%;
+    }
+    /* Outros ajustes responsivos, se precisar */
+
+     .app-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+
+    .app-aside {
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+    }
+}

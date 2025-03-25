@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Elementos do DOM
     const form = document.getElementById('registro-form');
     const gerarRegistroBtn = document.getElementById('gerar-registro');
     const categoriaSelect = document.getElementById('categoria');
@@ -8,142 +9,96 @@ document.addEventListener('DOMContentLoaded', function() {
     const registroTextarea = document.getElementById('registro-textarea');
     const registroGeradoSection = document.getElementById('registro-gerado');
 
-    function showCategoryError() {
-        let errorDiv = document.getElementById('category-error');
+    // Funções auxiliares
 
-        if (!errorDiv) {
-            errorDiv = document.createElement('div');
-            errorDiv.id = 'category-error';
-            errorDiv.style.backgroundColor = 'red';
-            errorDiv.style.color = 'white';
-            errorDiv.style.padding = '10px';
-            errorDiv.style.borderRadius = '5px';
-            errorDiv.style.position = 'fixed';
-            errorDiv.style.top = '20px';
-            errorDiv.style.left = '50%';
-            errorDiv.style.transform = 'translateX(-50%)';
-            errorDiv.style.zIndex = '1000';
-            errorDiv.style.opacity = '0';
-            errorDiv.style.transition = 'opacity 0.5s ease-out';
-            document.body.appendChild(errorDiv);
-        }
-
-        errorDiv.textContent = 'Por favor, selecione uma categoria.';
-        errorDiv.style.opacity = '1';
-
-        setTimeout(() => {
-            errorDiv.style.opacity = '0';
-        }, 3000);
-    }
-
-     function showCopyFeedback() {
-        let feedbackDiv = document.getElementById('copy-feedback');
-
+    // Exibe mensagens de feedback (erro ou sucesso)
+    function showFeedback(message, backgroundColor) {
+        let feedbackDiv = document.getElementById('feedback-message');
         if (!feedbackDiv) {
             feedbackDiv = document.createElement('div');
-            feedbackDiv.id = 'copy-feedback';
-            feedbackDiv.style.backgroundColor = 'green';
-            feedbackDiv.style.color = 'white';
-            feedbackDiv.style.padding = '10px';
-            feedbackDiv.style.borderRadius = '5px';
-            feedbackDiv.style.position = 'fixed';
-            feedbackDiv.style.top = '20px';
-            feedbackDiv.style.left = '50%';
-            feedbackDiv.style.transform = 'translateX(-50%)';
-            feedbackDiv.style.zIndex = '1000';
-            feedbackDiv.style.opacity = '0';
-            feedbackDiv.style.transition = 'opacity 0.5s ease-out';
+            feedbackDiv.id = 'feedback-message';
+            feedbackDiv.style.cssText = `
+                background-color: ${backgroundColor};
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1000;
+                opacity: 0;
+                transition: opacity 0.5s ease-out;
+            `;
             document.body.appendChild(feedbackDiv);
         }
 
-        feedbackDiv.textContent = 'Copiado para a área de transferência!';
+        feedbackDiv.textContent = message;
         feedbackDiv.style.opacity = '1';
 
         setTimeout(() => {
             feedbackDiv.style.opacity = '0';
-        }, 2000);
+        }, 3000);
     }
 
+    // Copia texto para a área de transferência
     function copyToClipboard(text) {
         const tempTextarea = document.createElement('textarea');
         tempTextarea.value = text;
-        tempTextarea.style.position = 'fixed';
+        tempTextarea.style.position = 'fixed'; // Para não interferir no layout
         tempTextarea.style.top = '0';
         tempTextarea.style.left = '0';
         tempTextarea.style.opacity = '0';
         document.body.appendChild(tempTextarea);
         tempTextarea.focus();
         tempTextarea.select();
+
         try {
-            const successful = document.execCommand('copy');
-            const msg = successful ? 'successful' : 'unsuccessful';
-            console.log('Fallback: Copying text command was ' + msg); // Mantive este console.log para debug
-            if(successful){
-                showCopyFeedback();
-            }
+            document.execCommand('copy');
+            showFeedback('Copiado para a área de transferência!', 'green');
         } catch (err) {
-            console.error('Fallback: Oops, unable to copy', err); //Mantive esse console.log
-            alert('Erro ao copiar para a área de transferência.');
+            console.error('Falha ao copiar: ', err);
+            showFeedback('Erro ao copiar para a área de transferência.', 'red');
         }
+
         document.body.removeChild(tempTextarea);
     }
 
+    // Define os valores padrão para o problema relatado e a tratativa
+    function setCategoryDefaults(categoria) {
+        const defaults = {
+            instalacao_ativacao: { problema: 'Solicitação de instalação/ativação.', tratativa: 'Realizada instalação/ativação/provisionamento utilizando ERP Voalle, UNM2000 ou TERMINUS.' },
+            manutencao: { problema: 'Solicitação de manutenção.', tratativa: 'Realizados procedimentos para atendimento de manutenção utilizando ERP Voalle, UNM2000 ou TERMINUS.' },
+            reparo: { problema: 'Solicitação de reparo.', tratativa: 'Identificado o problema e realizadas as medidas corretivas (provisionamento/desprovisionamento) utilizando ERP Voalle, UNM2000 ou TERMINUS.' },
+            troca_endereco: { problema: 'Solicitação de troca de endereço.', tratativa: 'Realizado desprovisionamento da ONU no endereço antigo e provisionamento da ONU novo endereço utilizando ERP Voalle, UNM2000 ou TERMINUS.' },
+            verificar_cto: { problema: 'Solicitação de verificação da CTO.', tratativa: 'Verificação da CTO realizada utilizando ERP Voalle, UNM2000 ou TERMINUS.' },
+            desprovisionar_provisionar: { problema: 'Solicitação de desprovisionamento e provisionamento de ONU.', tratativa: 'Desprovisionamento e provisionamento realizados utilizando ERP Voalle, UNM2000 ou TERMINUS.' },
+            verificar_conexao: { problema: 'Solicitação de verificação de conexão.', tratativa: 'Verificação de conexão realizada, com análise de parâmetros, utilizando ERP Voalle, UNM2000 ou TERMINUS.' },
+            apenas_desprovisionar: { problema: 'Solicitação de desprovisionamento.', tratativa: 'Desprovisionamento realizado utilizando ERP Voalle, UNM2000 ou TERMINUS.' },
+            apenas_provisionar: { problema: 'Solicitação de provisionamento.', tratativa: 'Provisionamento realizado utilizando ERP Voalle, UNM2000 ou TERMINUS.' }
+        };
+
+        problemaRelatadoTextarea.value = defaults[categoria]?.problema || '';
+        tratativaTextarea.value = defaults[categoria]?.tratativa || '';
+    }
+
+
+    // Listeners de eventos
+
+    // Ao mudar a categoria, define os valores padrão do problema/tratativa
     categoriaSelect.addEventListener('change', function() {
         const categoria = categoriaSelect.value;
-
-        problemaRelatadoTextarea.value = '';
-        tratativaTextarea.value = '';
-
-        camposAdicionais.classList.remove('hidden');
-
-        switch (categoria) {
-            case 'instalacao_ativacao':
-                problemaRelatadoTextarea.value = 'Solicitação de instalação/ativação.';
-                tratativaTextarea.value = 'Realizada instalação/ativação utilizando ERP Voalle, UNM2000 ou TERMINUS.';
-                break;
-            case 'manutencao':
-                problemaRelatadoTextarea.value = 'Solicitação de manutenção.';
-                tratativaTextarea.value = 'Realizados procedimentos de manutenção utilizando ERP Voalle, UNM2000 ou TERMINUS.';
-                break;
-            case 'reparo':
-                problemaRelatadoTextarea.value = 'Solicitação de reparo.';
-                tratativaTextarea.value = 'Identificado o problema e realizadas as medidas corretivas utilizando ERP Voalle, UNM2000 ou TERMINUS.';
-                break;
-            case 'troca_endereco':
-                problemaRelatadoTextarea.value = 'Solicitação de troca de endereço.';
-                tratativaTextarea.value = 'Realizado desprovisionamento no endereço antigo e provisionamento no novo endereço utilizando ERP Voalle, UNM2000 ou TERMINUS.';
-                break;
-            case 'verificar_cto':
-                problemaRelatadoTextarea.value = 'Solicitação de verificação da CTO.';
-                tratativaTextarea.value = 'Verificação da CTO realizada utilizando ERP Voalle, UNM2000 ou TERMINUS.';
-                break;
-            case 'desprovisionar_provisionar':
-                problemaRelatadoTextarea.value = 'Solicitação de desprovisionamento e provisionamento.';
-                tratativaTextarea.value = 'Desprovisionamento e provisionamento realizados utilizando ERP Voalle, UNM2000 ou TERMINUS.';
-                break;
-            case 'verificar_conexao':
-                problemaRelatadoTextarea.value = 'Solicitação de verificação de conexão.';
-                tratativaTextarea.value = 'Verificação de conexão realizada, com análise de parâmetros, utilizando ERP Voalle, UNM2000 ou TERMINUS.';
-                break;
-            case 'apenas_desprovisionar':
-                problemaRelatadoTextarea.value = 'Solicitação de desprovisionamento.';
-                tratativaTextarea.value = 'Desprovisionamento realizado utilizando ERP Voalle, UNM2000 ou TERMINUS.';
-                break;
-            case 'apenas_provisionar':
-                problemaRelatadoTextarea.value = 'Solicitação de provisionamento.';
-                tratativaTextarea.value = 'Provisionamento realizado utilizando ERP Voalle, UNM2000 ou TERMINUS.';
-                break;
-            default:
-                camposAdicionais.classList.add('hidden');
-        }
+        setCategoryDefaults(categoria); // Define os valores padrão
+        camposAdicionais.classList.toggle('hidden', categoria === ''); // Mostra/esconde campos adicionais
     });
 
-      gerarRegistroBtn.addEventListener('click', function() {
+    // Ao clicar em gerar o registro
+    gerarRegistroBtn.addEventListener('click', function() {
         const protocolo = document.getElementById('protocolo').value;
         const categoria = categoriaSelect.value;
 
         if (!protocolo || categoria === '') {
-            showCategoryError();
+            showFeedback('Por favor, preencha o protocolo e selecione uma categoria.', 'red');
             return;
         }
 

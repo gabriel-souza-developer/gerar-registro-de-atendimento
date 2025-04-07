@@ -158,6 +158,7 @@ body {
 textarea.form-control {
     resize: vertical;
     min-height: 80px;
+
 }
 
 .form-control:focus {
@@ -208,20 +209,18 @@ textarea.form-control {
 
 /* Aside */
 .app-aside {
-    background-color: var(--light-color);
-    padding: 20px;
+    padding: 10px;
     border-top: none;
     border-left: none;
     display: none;
     border-radius: 0 0 15px 15px;
-    margin-top: 20px;
     width: 100%;
 }
 
 .app-aside__title {
     color: var(--primary-color);
-    margin-bottom: 15px;
-    font-size: 1.4em;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
     font-weight: 600;
     text-align: center;
     text-transform: uppercase;
@@ -230,19 +229,20 @@ textarea.form-control {
 
 .app-aside__content {
     overflow: auto;
-    height: 300px;
+    height: 260px;
 }
 
 .app-aside__text {
-    white-space: pre-wrap;
-    font-family: 'Courier New', monospace;
+    font-family: "Gotham", sans-serif;
+    white-space: pre-wrap; /* Mantém as quebras de linha corretas */
+    word-wrap: break-word; 
     font-size: 1em;
-    height: 300px;
-    background-color: #fff;
-    padding: 15px;
+    height: 270px;
+    padding: 17px;
+    background-color: var(--primary-color);
+    color: white;
     border-radius: 8px;
-    border: 1px solid var(--input-border-color);
-    line-height: 1.4;
+    line-height: 1.5;
     width: 100%;
     box-sizing: border-box;
 }
@@ -253,7 +253,7 @@ textarea.form-control {
     padding: 15px;
     background-color: var(--dark-color);
     color: #fff;
-    font-size: 0.8em;
+    font-size: 1rem;
     border-radius: 0 0 15px 15px;
     width: 100%;
 }

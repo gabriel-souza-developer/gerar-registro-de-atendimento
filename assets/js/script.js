@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const registroGeradoSection = document.getElementById('registro-gerado');
 
     // Funções auxiliares
-
-    // Exibe mensagens de feedback (erro ou sucesso)
     function showFeedback(message, backgroundColor) {
         let feedbackDiv = document.getElementById('feedback-message');
         if (!feedbackDiv) {
@@ -34,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         feedbackDiv.textContent = message;
+        feedbackDiv.style.backgroundColor = backgroundColor; // Define a cor de fundo
         feedbackDiv.style.opacity = '1';
 
         setTimeout(() => {
@@ -67,21 +66,51 @@ document.addEventListener('DOMContentLoaded', function() {
     // Define os valores padrão para o problema relatado e a tratativa
     function setCategoryDefaults(categoria) {
         const defaults = {
-            instalacao_ativacao: { problema: 'Solicitação de instalação/ativação.', tratativa: 'Realizada instalação/ativação/provisionamento da ONU/ONT utilizando ERP Voalle, UNM2000 ou TERMINUS. Após o procedimento o técnico/solicitante foi orientado a testar conexão do cliente.' },
-            manutencao: { problema: 'Solicitação de manutenção.', tratativa: 'Realizados procedimentos para atendimento de manutenção utilizando ERP Voalle, UNM2000 ou TERMINUS. Após o procedimento o técnico/solicitante foi orientado a testar conexão do cliente.' },
-            reparo: { problema: 'Solicitação de reparo.', tratativa: 'Identificado o problema e realizadas as medidas corretivas (provisionamento/desprovisionamento) utilizando ERP Voalle, UNM2000 ou TERMINUS. Após o procedimento o técnico/solicitante foi orientado a testar conexão do cliente.' },
-            troca_endereco: { problema: 'Solicitação de troca de endereço.', tratativa: 'Realizado desprovisionamento da ONU/ONT no endereço antigo e provisionamento da ONU/ONT em novo endereço utilizando ERP Voalle, UNM2000 ou TERMINUS. Após o procedimento o técnico/solicitante foi orientado a testar conexão do cliente.' },
-            verificar_cto: { problema: 'Solicitação de verificação da CTO.', tratativa: 'Verificação da CTO realizada utilizando ERP Voalle, UNM2000 ou TERMINUS. Técnico foi informado sobre as portas disponíveis e indisponíveis da CTO' },
-            desprovisionar_provisionar: { problema: 'Solicitação de desprovisionamento e provisionamento da ONU/ONT.', tratativa: 'Desprovisionamento e provisionamento realizados utilizando ERP Voalle, UNM2000 ou TERMINUS. Após o procedimento o técnico/solicitante foi orientado a testar conexão do cliente.' },
-            verificar_conexao: { problema: 'Solicitação de verificação de conexão.', tratativa: 'Verificação de conexão realizada com análise de parâmetros e orientações de testes como: Reiniciar ONU/ONT e aguarda a estabilização dos LEDs, verificar se as configurações da WAN estão corretas (modo bridge ou router, autenticação PPPoE com IPv4 & IPv6), medir o nível de sinal de potência óptica, conferência de atenunação na fibra, testes de conexão com cabo Ehternet ou Wi-fi, análise de histórico de autenticação do cliente... As orientações foram repassadas ao técnico utilizando ERP Voalle, UNM2000 ou TERMINUS.' },
-            apenas_desprovisionar: { problema: 'Solicitação de desprovisionamento.', tratativa: 'Desprovisionamento realizado utilizando ERP Voalle, UNM2000 ou TERMINUS. Após o procedimento o técnico/solicitante foi orientado a testar conexão do cliente.' },
-            apenas_provisionar: { problema: 'Solicitação de provisionamento.', tratativa: 'Provisionamento realizado utilizando ERP Voalle, UNM2000 ou TERMINUS. Após o procedimento o técnico/solicitante foi orientado a testar conexão do cliente.' }
+            instalacao_ativacao: {
+                problema: 'Solicitação de instalação/ativação.',
+                tratativa: 'Realizada instalação/ativação e provisionamento da ONU/ONT utilizando ERP Voalle, UNM2000 ou TERMINUS.  Após os procedimentos, a conexão do cliente foi restabelecida com sucesso e o técnico/solicitante foi orientado a realizar testes no local.'
+            },
+            reparo_manutencao: {
+                problema: 'Solicitação de reparo/manutenção.',
+                tratativa: 'Realizados os procedimentos de reparo/manutenção, incluindo testes e configurações, utilizando ERP Voalle, UNM2000 ou TERMINUS. Foi confirmado que a conexão do cliente ficou estável e funcional após os ajustes.'
+            },
+            troca_endereco: {
+                problema: 'Solicitação de troca de endereço.',
+                tratativa: 'Realizado o desprovisionamento da ONU/ONT no endereço antigo e o provisionamento da ONU/ONT em novo endereço, utilizando ERP Voalle, UNM2000 ou TERMINUS. Após o procedimento foi constatado que a conexão do cliente subiu em sistema e o técnico/solicitante foi orientado a testar conexão no local.'
+            },
+            troca_equipamento: {
+                problema: 'Solicitação de troca de equipamento (desprovisionamento e provisionamento de nova ONU/ONT).',
+                tratativa: 'Realizado o desprovisionamento e, em seguida, o provisionamento da ONU/ONT utilizando ERP Voalle, UNM2000 ou TERMINUS. Após os procedimentos, a conexão do cliente foi restabelecida com sucesso e o técnico/solicitante foi orientado a realizar testes no local.'
+            },
+            verificar_cto: {
+                problema: 'Solicitação de verificação da CTO (Caixa de Terminação Óptica).',
+                tratativa: 'Verificação da CTO realizada, identificando as portas disponíveis e indisponíveis. As informações foram repassadas ao técnico para as devidas providências e testes. Segue resumo da análise/verificação: '
+            },
+            desprovisionar_provisionar: {
+                problema: 'Solicitação de desprovisionamento e provisionamento da ONU/ONT.',
+                tratativa: 'Realizado o desprovisionamento e o provisionamento da ONU/ONT utilizando ERP Voalle, UNM2000 ou TERMINUS. Após o procedimento, a conexão do cliente foi estabelecida com sucesso no sistema e o técnico/solicitante foi orientado a testar a conexão no local.'
+            },
+            analise_backoffice: {
+                problema: 'Solicitação de análise do BackOffice - BA.',
+                tratativa: 'Realizada análise da situação do cliente através do protocolo, verificando configurações, histórico de atendimentos e outros dados relevantes. Identificada a necessidade de desautorização e e autorização da ONU/ONT por meio das ferramentas ERP Voalle, UNM2000 ou TERMINUS. Após os procedimentos a conexão do cliente foi restabelecida e validada em sistema.'
+            },
+            verificar_conexao: {
+                problema: 'Solicitação de verificação de conexão do cliente.',
+                tratativa: 'Realizada a verificação da conexão do cliente, incluindo: análise de parâmetros (nível de sinal óptico ideal entre -5dBm e -25dBm, taxa de transmissão e perdas de pacotes); testes de conectividade (ping para servidores externos e traceroute para identificar possíveis gargalos); verificação das configurações da WAN (modo de operação: bridge ou router, autenticação PPPoE com usuário e senha, e configuração de DNS para 8.8.8.8 e 8.8.4.4); análise do histórico de autenticação (horários de conexão, desconexões frequentes e erros de autenticação); e reinicialização/reset dos equipamentos (reboot da ONU/ONT e aguardo da estabilização dos LEDs). As orientações e os resultados foram repassados ao técnico para auxiliar na solução do problema.'
+            },
+            apenas_desprovisionar: {
+                problema: 'Solicitação de apenas desprovisionar a ONU/ONT.',
+                tratativa: 'Realizado o desprovisionamento da ONU/ONT utilizando ERP Voalle, UNM2000 ou TERMINUS. Foi confirmado o desprovisionamento e repassado ao técnico.'
+            },
+            apenas_provisionar: {
+                problema: 'Solicitação de apenas provisionamento da ONU/ONT.',
+                tratativa: 'Realizado o provisionamento da ONU/ONT utilizando ERP Voalle, UNM2000 ou TERMINUS. Após o procedimento, a conexão foi estabelecida com sucesso no sistema e o técnico/solicitante foi orientado a testar a conexão no local.'
+            }
         };
 
         problemaRelatadoTextarea.value = defaults[categoria]?.problema || '';
         tratativaTextarea.value = defaults[categoria]?.tratativa || '';
     }
-
 
     // Listeners de eventos
 
@@ -103,9 +132,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         const evidencias = document.querySelector('input[name="evidencias"]:checked');
-        const evidenciasStr = evidencias ? evidencias.value.toUpperCase() : '';
+        let registroCompleto = `Protocolo de operações: ${protocolo}\n\nProblema relatado: ${problemaRelatadoTextarea.value}\n\nTratativa: ${tratativaTextarea.value}`;
 
-        let registroCompleto = `Protocolo de operações: ${protocolo}\n\nProblema relatado: ${problemaRelatadoTextarea.value}\n\nTratativa: ${tratativaTextarea.value}\n\nTécnico/solicitante enviou evidências: ${evidenciasStr}`;
+        // Adiciona a linha das evidências apenas se a categoria não for "analise_backoffice"
+        if (categoria !== 'analise_backoffice') {
+            const evidenciasStr = evidencias ? evidencias.value.toUpperCase() : '';
+            registroCompleto += `\n\nTécnico/solicitante enviou evidências: ${evidenciasStr}`;
+        }
 
         registroTextarea.value = registroCompleto;
         registroGeradoSection.style.display = 'block';

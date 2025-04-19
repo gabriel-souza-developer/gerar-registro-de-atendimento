@@ -37,11 +37,12 @@
                         <select class="form-control custom-select" id="categoria">
                             <option value="">Selecione a categoria</option>
                             <option value="instalacao_ativacao">Instalação/ativação</option>
-                            <option value="manutencao">Manutenção</option>
-                            <option value="reparo">Reparo</option>
+                            <option value="reparo_manutencao">Reparo/manutenção</option>
                             <option value="troca_endereco">Troca de endereço - desprovisionar e provisionar</option>
-                            <option value="verificar_cto">Verificar CTO</option>
+                            <option value="troca_equipamento">Troca de equipamento - desprovisionar e provisionar ONU</option>
+                            <option value="verificar_cto">Verificar CTO (Caixa de Terminação Óptica) </option>
                             <option value="desprovisionar_provisionar">Desprovisionar e provisionar ONU/ONT</option>
+                            <option value="analise_backoffice">Análise backoffice - BA</option>
                             <option value="verificar_conexao">Verificar conexão do cliente</option>
                             <option value="apenas_desprovisionar">Apenas desprovisionar</option>
                             <option value="apenas_provisionar">Apenas provisionar</option>
@@ -92,6 +93,16 @@
                 </div>
             </section>
         </main>
+
+              <!-- Botão para Rolar para o Fim -->
+      <button
+      id="scrollToBottomBtn"
+      title="Ir para o final da página"
+      class="scroll-button"
+    >
+      <i class="fas fa-arrow-down"></i>
+      <!-- Ícone de seta para baixo (Font Awesome) -->
+    </button>
 
         <footer class="app-footer">
             <p>© 2025 Gabriel A. Souza - Backoffice Redes. Todos os direitos reservados.

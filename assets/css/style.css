@@ -273,6 +273,45 @@ textarea.form-control {
     display: none;
 }
 
+
+/* Estilos para o Botão de Rolar para o Fim */
+#scrollToBottomBtn {
+    /* Posicionamento Fixo */
+    position: fixed;
+    bottom: 20px; /* Distância do fundo */
+    right: 20px; /* Distância da direita */
+    z-index: 999; /* Garante que fique acima de outros elementos */
+  
+    /* Aparência */
+    background-color: var(--primary-color);
+    color: white; 
+    border: none;
+    border-radius: 50%; /* Deixa o botão redondo */
+    width: 50px; 
+    height: 50px; 
+    font-size: 20px; 
+    cursor: pointer;
+    display: flex; /* Para centralizar o ícone */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.281); /* Sombra sutil (opcional) */
+    transition: background-color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease; /* Transição suave */
+  
+    /* Inicialmente oculto (opcional, veja JS) */
+     opacity: 0;
+     visibility: hidden;
+  }
+  
+  #scrollToBottomBtn:hover {
+    background-color: var(--primary-color-hover);
+  }
+  
+  /* Classe para mostrar o botão quando ativo */
+  #scrollToBottomBtn.visible {
+      opacity: 1;
+      visibility: visible;
+  }
+
 /* Media Queries para Responsividade */
 @media (max-width: 768px) {
     .app-container {

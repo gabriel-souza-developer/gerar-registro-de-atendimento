@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const defaults = {
             instalacao_ativacao: {
                 problema: 'Solicitação de instalação/ativação.',
-                tratativa: 'Realizada instalação/ativação e provisionamento da ONU/ONT utilizando ERP Voalle, UNM2000 ou TERMINUS.  Após os procedimentos, a conexão do cliente foi restabelecida com sucesso e o técnico/solicitante foi orientado a realizar testes no local.'
+                tratativa: 'Realizada instalação/ativação e provisionamento da ONU/ONT utilizando ERP Voalle, UNM2000 ou TERMINUS.  Após os procedimentos, a conexão do cliente foi estabelecida com sucesso e o técnico/solicitante foi orientado a realizar testes no local.'
             },
             reparo_manutencao: {
                 problema: 'Solicitação de reparo/manutenção.',
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             troca_endereco: {
                 problema: 'Solicitação de troca de endereço.',
-                tratativa: 'Realizado o desprovisionamento da ONU/ONT no endereço antigo e o provisionamento da ONU/ONT em novo endereço, utilizando ERP Voalle, UNM2000 ou TERMINUS. Após o procedimento foi constatado que a conexão do cliente subiu em sistema e o técnico/solicitante foi orientado a testar conexão no local.'
+                tratativa: 'Realizado o desprovisionamento da ONU/ONT no endereço antigo e o provisionamento da ONU/ONT no novo endereço utilizando ERP Voalle, UNM2000 ou TERMINUS. Após o procedimento foi constatado que a conexão do cliente subiu em sistema e o técnico/solicitante foi orientado a testar conexão no local.'
             },
             troca_equipamento: {
                 problema: 'Solicitação de troca de equipamento (desprovisionamento e provisionamento de nova ONU/ONT).',
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             verificar_cto: {
                 problema: 'Solicitação de verificação da CTO (Caixa de Terminação Óptica).',
-                tratativa: 'Verificação da CTO realizada, identificando as portas disponíveis e indisponíveis. As informações foram repassadas ao técnico para as devidas providências e testes. Segue resumo da análise/verificação: '
+                tratativa: 'Verificação da CTO realizada, identificando as portas disponíveis e indisponíveis. As informações foram repassadas ao técnico para as devidas providências e testes. Segue resumo da análise/verificação: \n\n '
             },
             desprovisionar_provisionar: {
                 problema: 'Solicitação de desprovisionamento e provisionamento da ONU/ONT.',
@@ -92,11 +92,11 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             analise_backoffice: {
                 problema: 'Solicitação de análise do BackOffice - BA.',
-                tratativa: 'Realizada análise da situação do cliente através do protocolo, verificando configurações, histórico de atendimentos e outros dados relevantes. Identificada a necessidade de desautorização e e autorização da ONU/ONT por meio das ferramentas ERP Voalle, UNM2000 ou TERMINUS. Após os procedimentos a conexão do cliente foi restabelecida e validada em sistema.'
+                tratativa: 'Realizada análise da situação do cliente através do protocolo, verificando configurações, histórico de atendimentos e outros dados relevantes. Identificada a necessidade de desautorização e e autorização da ONU/ONT por meio das ferramentas ERP Voalle, UNM2000 ou TERMINUS. \n\nApós os procedimentos a conexão do cliente foi restabelecida e validada (IP disponível) em sistema.'
             },
             verificar_conexao: {
                 problema: 'Solicitação de verificação de conexão do cliente.',
-                tratativa: 'Realizada a verificação da conexão do cliente, incluindo: análise de parâmetros (nível de sinal óptico ideal entre -5dBm e -25dBm, taxa de transmissão e perdas de pacotes); testes de conectividade (ping para servidores externos e traceroute para identificar possíveis gargalos); verificação das configurações da WAN (modo de operação: bridge ou router, autenticação PPPoE com usuário e senha, e configuração de DNS para 8.8.8.8 e 8.8.4.4); análise do histórico de autenticação (horários de conexão, desconexões frequentes e erros de autenticação); e reinicialização/reset dos equipamentos (reboot da ONU/ONT e aguardo da estabilização dos LEDs). As orientações e os resultados foram repassados ao técnico para auxiliar na solução do problema.'
+                tratativa: 'Realizada a verificação da conexão do cliente, incluindo: análise de parâmetros (nível de sinal óptico ideal entre -5dBm e -25dBm, taxa de transmissão e perdas de pacotes); testes de conectividade (ping para servidores externos e traceroute para identificar possíveis gargalos); verificação das configurações da WAN (modo de operação: bridge ou router, autenticação PPPoE com usuário e senha, e configuração de DNS para 8.8.8.8 e 1.0.0.1); análise do histórico de autenticação (horários de conexão, desconexões frequentes e erros de autenticação); e reinicialização/reset dos equipamentos (reboot da ONU/ONT e estabilização dos LEDs). As orientações e os resultados foram repassados ao técnico para auxiliar na solução do problema.'
             },
             apenas_desprovisionar: {
                 problema: 'Solicitação de apenas desprovisionar a ONU/ONT.',
@@ -105,14 +105,18 @@ document.addEventListener('DOMContentLoaded', function() {
             apenas_provisionar: {
                 problema: 'Solicitação de apenas provisionamento da ONU/ONT.',
                 tratativa: 'Realizado o provisionamento da ONU/ONT utilizando ERP Voalle, UNM2000 ou TERMINUS. Após o procedimento, a conexão foi estabelecida com sucesso no sistema e o técnico/solicitante foi orientado a testar a conexão no local.'
-            }
+            },
+
+            oscilacao: {
+                problema: "Solicitação de análise de conexão. Cliente informa que há perdas de pacotes frequentemente e muita lentidão.",
+                tratativa:
+                  "Realizada a verificação da conexão do cliente, incluindo: análise de parâmetros (nível de sinal óptico ideal entre -5dBm e -25dBm, taxa de transmissão e perdas de pacotes); testes de conectividade (ping para servidores externos e traceroute para identificar possíveis gargalos); verificação das configurações da WAN (modo de operação: bridge ou router, autenticação PPPoE com usuário e senha, e configuração de DNS para 8.8.8.8 e 1.0.0.1); análise do histórico de autenticação (horários de conexão, desconexões frequentes e erros de autenticação); e reinicialização/reset dos equipamentos (reboot da ONU/ONT e estabilização dos LEDs). As orientações e os resultados foram repassados ao técnico para auxiliar na solução do problema. Além disso, foi repassada para o técnico as seguintes informações: \n\nNos últimos dias, clientes de diversas regiões do Nordeste podem ter percebido oscilações no serviço de internet, como lentidão, quedas rápidas ou dificuldade de acesso a alguns sites. Essas situações estão sendo tratadas com prioridade pela equipe técnica interna. Estamos acompanhando essas oscilações, que têm afetado não apenas nossos serviços, mas também outros provedores da região. A equipe técnica segue monitorando de forma contínua para minimizar os impactos e garantir a estabilidade da conexão.",
+              }
         };
 
         problemaRelatadoTextarea.value = defaults[categoria]?.problema || '';
         tratativaTextarea.value = defaults[categoria]?.tratativa || '';
     }
-
-    // Listeners de eventos
 
     // Ao mudar a categoria, define os valores padrão do problema/tratativa
     categoriaSelect.addEventListener('change', function() {

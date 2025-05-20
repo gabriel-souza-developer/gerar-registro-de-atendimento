@@ -111,7 +111,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 problema: "Solicitação de análise de conexão. Cliente informa que há perdas de pacotes frequentemente e muita lentidão.",
                 tratativa:
                   "Realizada a verificação da conexão do cliente, incluindo: análise de parâmetros (nível de sinal óptico ideal entre -5dBm e -25dBm, taxa de transmissão e perdas de pacotes); testes de conectividade (ping para servidores externos e traceroute para identificar possíveis gargalos); verificação das configurações da WAN (modo de operação: bridge ou router, autenticação PPPoE com usuário e senha, e configuração de DNS para 8.8.8.8 e 1.0.0.1); análise do histórico de autenticação (horários de conexão, desconexões frequentes e erros de autenticação); e reinicialização/reset dos equipamentos (reboot da ONU/ONT e estabilização dos LEDs). As orientações e os resultados foram repassados ao técnico para auxiliar na solução do problema. Além disso, foi repassada para o técnico as seguintes informações: \n\nNos últimos dias, clientes de diversas regiões do Nordeste podem ter percebido oscilações no serviço de internet, como lentidão, quedas rápidas ou dificuldade de acesso a alguns sites. Essas situações estão sendo tratadas com prioridade pela equipe técnica interna. Estamos acompanhando essas oscilações, que têm afetado não apenas nossos serviços, mas também outros provedores da região. A equipe técnica segue monitorando de forma contínua para minimizar os impactos e garantir a estabilidade da conexão.",
-              }
+              },
+             autenticar_PPPoE: {
+                problema: "Solicitação de análise de autenticação PPPoE/senha na base de dados.",
+                tratativa:
+                  "Realizada verificação e feita modificações necessárias para que seja feita autenticação de conexão via PPPoE e senha. Dados repassados para o técnico/solicitante. Após o procedimento, a conexão foi estabelecida com sucesso no sistema e o técnico/solicitante foi orientado a testar a conexão no local.",
+              } 
         };
 
         problemaRelatadoTextarea.value = defaults[categoria]?.problema || '';

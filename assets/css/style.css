@@ -33,8 +33,7 @@ body {
 
 /* App Container */
 .app-container {
-    max-width: 800px;
-    padding: 30px;
+    max-width: 700px;
     margin: 20px auto;
     background-color: #fff;
     border-radius: 15px;
@@ -111,10 +110,9 @@ body {
 
 /* Form Section */
 .form__section {
-    margin-bottom: 20px;
-    border: 1px solid var(--form-section-border);
+    /* border: 1px solid var(--form-section-border); */
     border-radius: 10px;
-    padding: 20px;
+    padding: 5px 15px;
     background-color: var(--form-section-bg);
     width: 100%;
 }
@@ -173,7 +171,7 @@ textarea.form-control {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 /* Form Submit Button */
@@ -229,7 +227,6 @@ textarea.form-control {
 
 .app-aside__content {
     overflow: auto;
-    height: 260px;
 }
 
 .app-aside__text {
@@ -237,7 +234,7 @@ textarea.form-control {
     white-space: pre-wrap; /* Mantém as quebras de linha corretas */
     word-wrap: break-word; 
     font-size: 1em;
-    height: 270px;
+    height: 300px;
     padding: 17px;
     background-color: var(--primary-color);
     color: white;
@@ -274,28 +271,27 @@ textarea.form-control {
 }
 
 
-/* Estilos para o Botão de Rolar para o Fim */
 #scrollToBottomBtn {
     /* Posicionamento Fixo */
     position: fixed;
-    bottom: 20px; /* Distância do fundo */
-    right: 20px; /* Distância da direita */
-    z-index: 999; /* Garante que fique acima de outros elementos */
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 999; 
   
     /* Aparência */
     background-color: var(--primary-color);
     color: white; 
     border: none;
-    border-radius: 50%; /* Deixa o botão redondo */
+    border-radius: 50%; 
     width: 50px; 
     height: 50px; 
     font-size: 20px; 
     cursor: pointer;
-    display: flex; /* Para centralizar o ícone */
+    display: flex; 
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.281); /* Sombra sutil (opcional) */
-    transition: background-color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease; /* Transição suave */
+    transition: background-color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease; 
   
     /* Inicialmente oculto (opcional, veja JS) */
      opacity: 0;
